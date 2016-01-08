@@ -4,9 +4,9 @@ meta:
     author = "Brian C. Bell -- @biebsmalwareguy"
 
 	strings:
-	$s1 = "SetWindowsHookExA" nocase
-	$s2 = "WH_KEYBOARD_LL" nocase
-	$s3 = "WH_KEYBOARD" nocase
+	$str_Win32hookapi = "SetWindowsHookEx" nocase
+	$str_Win32llkey = "WH_KEYBOARD_LL" nocase
+	$str_Win32key = "WH_KEYBOARD" nocase
 
 	condition:
     2 of them
