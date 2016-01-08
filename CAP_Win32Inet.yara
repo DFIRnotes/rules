@@ -3,7 +3,7 @@
   Version 0.0.0
 */
 
-rule String_Winsock2_Library
+rule Str_Win32_Winsock2_Library
 {
     meta:
         author = "@adricnet"
@@ -16,7 +16,7 @@ rule String_Winsock2_Library
 	(any of ($ws2_lib, $wsock2_lib))
 }
 
-rule String_Wininet_Library
+rule Str_Win32_Wininet_Library
 {
     meta:
         author = "@adricnet"
@@ -28,7 +28,7 @@ rule String_Wininet_Library
 	(all of ($wininet*))
 }
 
-rule String_Internet_API
+rule Str_Win32_Internet_API
 {
     meta:
         author = "@adricnet"
@@ -44,7 +44,7 @@ rule String_Internet_API
 	(any of ($wininet_call*))
 }
 
-rule String_Http_API
+rule Str_Win32_Http_API
 {
     meta:
         author = "@adricnet"
