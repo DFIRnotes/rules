@@ -1,9 +1,10 @@
 #Win7 vol:
 # define $FILE
-PLUGIN=Win7SP1x86
+PROFILE=Win7SP1x86
 ## redfine this to us another vol binary or include the plugins path
 VOL_COMM=vol.py 
 ## create and define OUT_FOLDER to not use cwd
+OUT_FOLDER=.
 OUT=text
 
 for p in apihooks autoruns callbacks cmdline cmdscan clipboard consoles dlllist driverirp drivermodule driverscan handles hivelist hivescan iehistory imageinfo ldrmodules malfind malprocfind modscan modules netscan pslist psscan pstree psxview schtasks shellbags ; do 
