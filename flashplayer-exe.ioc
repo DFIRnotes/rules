@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<ioc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="6a81afdb-55fe-4dc8-8760-0263cd259926" last-modified="2016-06-09T19:21:49" xmlns="http://schemas.mandiant.com/2010/ioc">
+  <short_description>FlashPlayer</short_description>
+  <description>Trying to improve detection for fake FlashPlayer exe downloads seen ITW, such as example VT link --adricnet</description>
+  <authored_by>adricnet</authored_by>
+  <authored_date>2016-06-09T19:14:12</authored_date>
+  <links>
+    <link rel="Virustotal">https://www.virustotal.com/en/file/00968819FF28EC966B1BBB72525DD0688422899F41CA8AD5BCB7646695EAE7ED/analysis/</link>
+  </links>
+  <definition>
+    <Indicator operator="OR" id="d37e78a3-8774-46b4-b046-b287f6fd46ac">
+      <Indicator operator="AND" id="5b6153ef-0664-4e57-a4d2-e7cd0865e4b8">
+        <IndicatorItem id="41546b69-ba11-4d34-9a18-74c935c60ce7" condition="is">
+          <Context document="FileItem" search="FileItem/FileName" type="mir" />
+          <Content type="string">FlashPlayer.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="aaeee13a-fa69-4c62-9e54-ec5e709a09af" condition="contains">
+          <Context document="FileItem" search="FileItem/FilePath" type="mir" />
+          <Content type="string">Downloads</Content>
+        </IndicatorItem>
+        <IndicatorItem id="39d948a8-ae91-44ee-b270-6bbe92c508fd" condition="contains">
+          <Context document="FileItem" search="FileItem/PEInfo/DigitalSignature/Description" type="mir" />
+          <Content type="string">Comodo</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </definition>
+</ioc>

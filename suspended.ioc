@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<ioc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="f018d92b-7680-4ac7-8175-ffc5d480ef92" last-modified="2016-06-09T19:22:55" xmlns="http://schemas.mandiant.com/2010/ioc">
+  <short_description>Suspended Process</short_description>
+  <description>Test rule looking for Suspended processes, part of process hollowing and injection techniques --adricnet</description>
+  <authored_by>adricnet</authored_by>
+  <authored_date>2016-06-09T18:17:59</authored_date>
+  <links />
+  <definition>
+    <Indicator operator="OR" id="fa23da32-73cd-4440-8bd4-c37a5e456b03">
+      <IndicatorItem id="5745e3a6-712e-4593-a868-f4af7adcfff7" condition="contains">
+        <Context document="ProcessItem" search="ProcessItem/PortList/PortItem/state" type="mir" />
+        <Content type="string">SUSPENDED</Content>
+      </IndicatorItem>
+      <IndicatorItem id="f092c7db-1ebf-4a27-8f9f-720405027328" condition="contains">
+        <Context document="ProcessItem" search="ProcessItem/SectionList/MemorySection/RawFlags" type="mir" />
+        <Content type="string">SUSPENDED</Content>
+      </IndicatorItem>
+    </Indicator>
+  </definition>
+</ioc>

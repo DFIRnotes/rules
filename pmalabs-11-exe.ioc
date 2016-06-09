@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<ioc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="23fc9336-d958-46d2-b602-cac929718ad5" last-modified="2016-06-09T19:01:53" xmlns="http://schemas.mandiant.com/2010/ioc">
+  <short_description>PMA Labs 1 1 exe</short_description>
+  <description>Sample IOC matches Lab01-1.exe from Practical Malware Analysis, No Starch Press --adricnet</description>
+  <authored_by>adricnet</authored_by>
+  <authored_date>2016-06-09T18:02:29</authored_date>
+  <links />
+  <definition>
+    <Indicator operator="OR" id="2d9c265e-fab0-4751-a836-11711885fc12">
+      <Indicator operator="AND" id="09a13d28-4fb4-47fe-b452-d21610c5b4fe">
+        <IndicatorItem id="40bc8229-5c05-4d8f-9af0-ac3c9cae0bf8" condition="contains">
+          <Context document="FileItem" search="FileItem/PEInfo/ImportedModules/Module/Name" type="mir" />
+          <Content type="string">kernel32.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="69c0a2f9-8125-4234-8876-5e87fc60ba45" condition="contains">
+          <Context document="FileItem" search="FileItem/StringList/string" type="mir" />
+          <Content type="string">c:\Windows\System32\kernel32.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="83a9c4e2-d29b-4ce1-b299-11500f02442a" condition="contains">
+          <Context document="FileItem" search="FileItem/StringList/string" type="mir" />
+          <Content type="string">Lab01-1.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="dc155e1b-ab93-4802-9b38-7b74759fd647" condition="contains">
+          <Context document="FileItem" search="FileItem/FileExtension" type="mir" />
+          <Content type="string">exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="4cb8be29-6245-47ce-aa13-05e47c2f8b82" condition="contains">
+          <Context document="FileItem" search="FileItem/FileName" type="mir" />
+          <Content type="string">01-1</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </definition>
+</ioc>
