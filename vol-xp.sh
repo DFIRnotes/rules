@@ -47,7 +47,7 @@ echo -n " $q, "
 $VOL_COMM -f $VOL_FILEIN $q  > $OUT_FOLDER/$VOL_FILEIN-vol25c-$q.txt; done
 echo "$STARS 1) Batch processing, simple plugin arguments done"
 
-echo '$STARS 2) Starting complex plugins: pstotal DOT, eventlogs, svcscan V, mutantscan N, mftparser BODY, and timeliner'
+echo "$STARS 2) Starting complex plugins: pstotal DOT, eventlogs, svcscan V, mutantscan N, mftparser BODY, and timeliner"
 $VOL_COMM -f $VOL_FILEIN pstotal --output=dot  > $OUT_FOLDER/$VOL_FILEIN-vol25c-pstotal.dot
 $VOL_COMM -f $VOL_FILEIN evtlogs -S -D $OUT_FOLDER/  > $OUT_FOLDER/$VOL_FILEIN-vol25c-evtlogs.txt
 $VOL_COMM -f $VOL_FILEIN svcscan -v  > $OUT_FOLDER/$VOL_FILEIN-vol25c-svcscanv.txt
