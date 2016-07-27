@@ -11,7 +11,8 @@
 
 ## always check the profile if things aren't working right!
 VOLATILITY_PROFILE=Win7SP1x86
-#define $VOLATILITY_FILEIN for your memory image
+#define $VOLATILITY_FILEIN for your memory image via export or here
+#VOLATILITY_FILEIN=xp-tdungan-memory-raw.001
 ## redefine this to use another vol binary or include more plugins path
 VOLATILITY_COMM=vol.py 
 ## Volatility banner on stderr (FD 2)  only needed once per run :)
@@ -42,7 +43,7 @@ $VOLATILITY_COMM -f $VOLATILITY_FILEIN  $p --output-file=$OUT_FOLDER/$VOLATILITY
 echo; echo "$STARS 0)Quick tables completed. 1)Starting batch plugin processing ..."
 
 ## do the whole batch of data processing, simple arguments
-for q in apihooks callbacks cmdline cmdscan clipboard consoles dlllist driverirp drivermodule driverscan getsids idt iehistory handles hivelist hivescan imageinfo modscan modules psscan psxview schtasks shellbags ssdt; do 
+for q in apihooks callbacks cmdline cmdscan clipboard consoles dlllist driverirp drivermodule driverscan getsids idt iehistory handles hivelist hivescan imageinfo modscan modules psxview schtasks shellbags ssdt; do 
 
 echo -n " $q, "
 $VOLATILITY_COMM -f $VOLATILITY_FILEIN  $q  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-$q.txt; done
@@ -65,5 +66,5 @@ $VOLATILITY_COMM -f $VOLATILITY_FILEIN  screenshot -D $OUT_FOLDER
 echo "$STARS Volatility batch run on $VOLATILITY_FILEIN completed!"
 
 ### and then something like this
-VOLATILITY_FILEIN=xp-tdungan-memory-raw.001 VOLATILITY_PROFILE=WinXPSP3x86 VOLATILITY_COMM=vol.py; for pid in 3296 11640 12244 ; do echo -n "PID $pid :"; for p in dlllist ldrmodules malfind handles; do echo -n "$p "; $VOLATILITY_COMM -f $VOLATILITY_FILEIN  $p -p $pid > $VOLATILITY_FILEIN-vol25c-$pid-$p.txt 2>/dev/null; done; echo; done
+#VOLATILITY_FILEIN=xp-tdungan-memory-raw.001 VOLATILITY_PROFILE=WinXPSP3x86 VOLATILITY_COMM=vol.py; for pid in 3296 11640 12244 ; do echo -n "PID $pid :"; for p in dlllist ldrmodules malfind handles; do echo -n "$p "; $VOLATILITY_COMM -f $VOLATILITY_FILEIN  $p -p $pid > $VOLATILITY_FILEIN-vol25c-$pid-$p.txt 2>/dev/null; done; echo; done
 ###
