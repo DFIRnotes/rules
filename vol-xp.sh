@@ -1,20 +1,61 @@
-#winxp vol:
-PROFILE=WinXPSP3x86
-#define $FILE
-## redfine this to us another vol binary or include the plugins path
+#/bin/bash
+### Volatilitys semi-automated memory image processing, for WinXP images
+### bsk for dfirnotes.org, Copyleft MIT License : https://github.com/DFIRnotes/rules/blob/master/LICENSE
+### Requirements: SIFT 3 or volatility 2.5.x ; pictures needs PIL and dot available
+### Run volatility framework anlaysis plugins against a provided image in an opinionated order
+### 	0) Quick pass to list processes and connections, 1)long run of many plugins with simple args, 
+### 	2) long run of complex plugins; 3)make pictures
+### Ref: FOR508, Art of Memory Forensics, Malware Analyst Cookbook
+
+### WinXP version
+
+VOL_PROFILE=WinXPSP3x86
+#define $VOL_FILEIN for your memory image
+## redefine this to use another vol binary or include more plugins path
 VOL_COMM=vol.py 
-## create and define OUT_FOLDER to not use cwd
+BANNER_CATCH="2> /dev/null" ## FIXMEVolatility banner only needed once per run :)
+## create and define OUT_FOLDER; . is fine
+STARS="***vol batch***"
 
-for p in apihooks autoruns callbacks connections connscan cmdline cmdscan clipboard consoles dlllist driverirp drivermodule driverscan iehistory handles hivelist hivescan imageinfo ldrmodules malfind malprocfind modscan modules netscan pslist psscan pstree psxview schtasks shellbags ; do 
-echo -n "starting $p - "
-$VOL_COMM --profile $PROFILE -f $FILE $p > $OUT_FOLDER/$FILE-vol25c-$p.txt; done
-echo "$p done"
+## WISHLIST: find a way to use the ssdeep, baseline community plugins 
+## BUGFIX: Clean up variables using VOL env vars, document how to branch -2
+## BUGFIX: banner catch doesn't work
+## FEATURE: if file exists and is greater than vol usage error, skip the plugin ?
+## WISHLIST perf : Specify kdbg offset?
+## WISHLIST: duplicate image file to run plugins in parallel for faster results / test this more
+## WISHLIST: port to BAT for Windows or python for crossplatform
 
-echo 'starting complex plugins: eventlogs svcscan V mutantscan N and timeliner'
-$VOL_COMM --profile $PROFILE -f $FILE evtlogs -s -O $OUT_FOLDER/ > $OUT_FOLDER/$FILE-vol25c-evtlogs.txt
-$VOL_COMM --profile $PROFILE -f $FILE svcscan -v > $OUT_FOLDER/$FILE-vol25c-svcscanv.txt
-$VOL_COMM --profile $PROFILE -f $FILE mutantscan -s > $OUT_FOLDER/$FILE-vol25c-mutantsv.txt
-$VOL_COMM --profile $PROFILE -f $FILE timeliner > $OUT_FOLDER/$FILE-vol25c-tl.txt
-echo "Done!"
+## Volatility banner only needed once per run :)
+echo $STARS using Volatility Foundation Volatility Framework 2.5 + Community plugins on `uname`
 
-## wanted, the ss, bl
+## get some tables upfront to look for interesting processes
+echo "$STARS 0) First, quick tables upfront to look for interesting processes"
+for p in pstree malsysproc connections sockets; do
+echo -n "$p "
+$VOL_COMM -f $VOL_FILEIN $p --output-file=$OUT_FOLDER/$VOL_FILEIN-vol25c-$p.txt $BANNER_CATCH ; done
+echo "$STARS Quick tables completed. Starting batch processing ..."
+
+## do the whole batch of data processing, simple arguments
+for q in apihooks autoruns callbacks connections connscan cmdline cmdscan clipboard consoles dlllist driverirp drivermodule driverscan getsids iehistory handles hivelist hivescan imageinfo ldrmodules malfind malprocfind modscan modules psscan psxview schtasks shellbags sockscan ; do 
+
+echo -n " $q - "
+$VOL_COMM -f $VOL_FILEIN $q $BANNER_CATCH > $OUT_FOLDER/$VOL_FILEIN-vol25c-$q.txt; done
+echo "$STARS 1) Batch processing, simple plugin arguments done"
+
+echo '$STARS 2) Starting complex plugins: pstotal DOT, eventlogs, svcscan V, mutantscan N, mftparser BODY, and timeliner'
+$VOL_COMM -f $VOL_FILEIN pstotal --output=dot $BANNER_CATCH > $OUT_FOLDER/$VOL_FILEIN-vol25c-pstotal.dot
+$VOL_COMM -f $VOL_FILEIN evtlogs -S -D $OUT_FOLDER/ $BANNER_CATCH > $OUT_FOLDER/$VOL_FILEIN-vol25c-evtlogs.txt
+$VOL_COMM -f $VOL_FILEIN svcscan -v $BANNER_CATCH > $OUT_FOLDER/$VOL_FILEIN-vol25c-svcscanv.txt
+$VOL_COMM -f $VOL_FILEIN mutantscan -s $BANNER_CATCH > $OUT_FOLDER/$VOL_FILEIN-vol25c-mutantsv.txt
+$VOL_COMM -f $VOL_FILEIN mftparser --output=body $BANNER_CATCH > $OUT_FOLDER/$VOL_FILEIN-vol25c-mftparser-body.txt 
+$VOL_COMM -f $VOL_FILEIN timeliner $BANNER_CATCH > $OUT_FOLDER/$VOL_FILEIN-vol25c-tl.txt
+
+echo "$STARS 3) Make pictures!"
+dot -T png $OUT_FOLDER/$VOL_FILEIN-vol25c-pstotal.dot > $OUT_FOLDER/$VOL_FILEIN-vol25c-pstotal.png
+$VOL_COMM -f $VOL_FILEIN screenshot -D $OUT_FOLDER $BANNER_CATCH
+
+echo "$STARS Volatility batch run on $VOL_FILEIN completed!"
+
+### and then
+for pid in $rogues; do for p in dlllist ldrmodules malfind handles; do echo -n "PID $pid"; $VOL_COMM -f $VOL_FILEIN --profile $VOL_PROFILE $p -p $pid > $VOL_FILEIN-vol25c-$pid-$p.txt; done
+###
