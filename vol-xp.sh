@@ -43,16 +43,17 @@ $VOL_COMM -f $VOL_FILEIN --profile $VOL_PROFILE $p --output-file=$OUT_FOLDER/$VO
 echo;echo "$STARS 0)Quick tables completed. 1)Starting batch plugin processing ..."
 
 ## do the whole batch of data processing, simple arguments
-for q in apihooks autoruns callbacks connections connscan cmdline cmdscan clipboard consoles dlllist driverirp drivermodule driverscan getsids iehistory handles hivelist hivescan imageinfo ldrmodules malfind malprocfind modscan modules psscan psxview schtasks shellbags sockscan ; do 
+for q in apihooks autoruns callbacks connections connscan cmdline cmdscan clipboard consoles dlllist driverirp drivermodule driverscan getsids iehistory handles hivelist hivescan imageinfo modscan modules psscan psxview schtasks shellbags sockscan ; do 
 
 echo -n " $q, "
 $VOL_COMM -f $VOL_FILEIN --profile $VOL_PROFILE $q  > $OUT_FOLDER/$VOL_FILEIN-vol25c-$q.txt; done
 echo "$STARS 1) Batch processing, simple plugin arguments done"
 
-echo "$STARS 2) Starting complex plugins: pstotal DOT, eventlogs, svcscan V, mutantscan N, mftparser BODY, and timeliner"
+echo "$STARS 2) Starting complex plugins: pstotal DOT, eventlogs, svcscan V, malfind D, mutantscan N, mftparser BODY, and timeliner"
 $VOL_COMM -f $VOL_FILEIN --profile $VOL_PROFILE pstotal --output=dot  > $OUT_FOLDER/$VOL_FILEIN-vol25c-pstotal.dot
 $VOL_COMM -f $VOL_FILEIN --profile $VOL_PROFILE evtlogs -S -D $OUT_FOLDER/  > $OUT_FOLDER/$VOL_FILEIN-vol25c-evtlogs.txt
 $VOL_COMM -f $VOL_FILEIN --profile $VOL_PROFILE svcscan -v  > $OUT_FOLDER/$VOL_FILEIN-vol25c-svcscanv.txt
+$VOL_COMM -f $VOL_FILEIN --profile $VOL_PROFILE malfind -D $OUT_FOLDER  > $OUT_FOLDER/$VOL_FILEIN-vol25c-malfindD.txt
 $VOL_COMM -f $VOL_FILEIN --profile $VOL_PROFILE mutantscan -s  > $OUT_FOLDER/$VOL_FILEIN-vol25c-mutantsv.txt
 $VOL_COMM -f $VOL_FILEIN --profile $VOL_PROFILE mftparser --output=body  > $OUT_FOLDER/$VOL_FILEIN-vol25c-mftparser-body.txt 
 $VOL_COMM -f $VOL_FILEIN --profile $VOL_PROFILE timeliner  > $OUT_FOLDER/$VOL_FILEIN-vol25c-tl.txt
