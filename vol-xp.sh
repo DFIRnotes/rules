@@ -63,6 +63,6 @@ $VOL_COMM -f $VOL_FILEIN --profile $VOL_PROFILE screenshot -D $OUT_FOLDER
 
 echo "$STARS Volatility batch run on $VOL_FILEIN completed!"
 
-### and then
-for pid in $rogues; do for p in dlllist ldrmodules malfind handles; do echo -n "PID $pid"; $VOL_COMM -f $VOL_FILEIN --profile $VOL_PROFILE $p -p $pid > $VOL_FILEIN-vol25c-$pid-$p.txt; done
+### and then something like this
+VOL_FILEIN=xp-tdungan-memory-raw.001 VOL_PROFILE=WinXPSP3x86 VOL_COMM=vol.py; for pid in 3296 11640 12244 ; do echo -n "PID $pid :"; for p in dlllist ldrmodules malfind handles; do echo -n "$p "; $VOL_COMM -f $VOL_FILEIN --profile $VOL_PROFILE $p -p $pid > $VOL_FILEIN-vol25c-$pid-$p.txt 2>/dev/null; done; echo; done
 ###
