@@ -1,5 +1,5 @@
 #/bin/bash
-### Volatilitys semi-automated memory image processing, for WinXP images
+### Volatility semi-automated memory image processing, for WinXP images
 ### bsk for dfirnotes.org, Copyleft MIT License : https://github.com/DFIRnotes/rules/blob/master/LICENSE
 ### Requirements: SIFT 3 or volatility 2.5.x ; pictures needs PIL and dot available
 ### Run volatility framework anlaysis plugins against a provided image in an opinionated order
@@ -38,7 +38,7 @@ echo "$STARS 0) First, quick tables upfront to look for interesting processes"
 for p in pstree malsysproc; do
 echo -n "$p "
 $VOL_COMM -f $VOL_FILEIN $p --output-file=$OUT_FOLDER/$VOL_FILEIN-vol25c-$p.txt  ; done
-echo "$STARS 0)Quick tables completed. 1)Starting batch plugin processing ..."
+echo; echo "$STARS 0)Quick tables completed. 1)Starting batch plugin processing ..."
 
 ## do the whole batch of data processing, simple arguments
 for q in apihooks autoruns callbacks cmdline cmdscan clipboard consoles dlllist driverirp drivermodule driverscan getsids iehistory handles hivelist hivescan imageinfo ldrmodules malfind malprocfind modscan modules psscan psxview schtasks shellbags ; do 

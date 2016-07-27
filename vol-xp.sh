@@ -1,5 +1,5 @@
 #/bin/bash
-### Volatilitys semi-automated memory image processing, for WinXP images
+### Volatility semi-automated memory image processing, for WinXP images
 ### bsk for dfirnotes.org, Copyleft MIT License : https://github.com/DFIRnotes/rules/blob/master/LICENSE
 ### Requirements: SIFT 3 or volatility 2.5.x ; pictures needs PIL and dot available
 ### Run volatility framework anlaysis plugins against a provided image in an opinionated order
@@ -13,17 +13,22 @@ VOL_PROFILE=WinXPSP3x86
 #define $VOL_FILEIN for your memory image
 ## redefine this to use another vol binary or include more plugins path
 VOL_COMM=vol.py 
-BANNER_CATCH="2> /dev/null" ## FIXMEVolatility banner only needed once per run :)
+## Volatility banner on stderr (FD 2)  only needed once per run :)
+exec 2>/dev/null
 ## create and define OUT_FOLDER; . is fine
-STARS="***vol batch***"
+STARS="***Volatility batch***"
 
+### TODO  
+## BUGFIX: Set out location to . if env var not set
+## FEATURE: document how to branch -2
+## FEATURE: Pull volatility version rather than static string
+## FEATURE: if file exists and is greater than sizeof(vol usage error), skip the plugin ?
+## FEATURE: tidy malsysproc extra linefeeds ?
 ## WISHLIST: find a way to use the ssdeep, baseline community plugins 
-## BUGFIX: Clean up variables using VOL env vars, document how to branch -2
-## BUGFIX: banner catch doesn't work
-## FEATURE: if file exists and is greater than vol usage error, skip the plugin ?
 ## WISHLIST perf : Specify kdbg offset?
 ## WISHLIST: duplicate image file to run plugins in parallel for faster results / test this more
-## WISHLIST: port to BAT for Windows or python for crossplatform
+## WISHLIST: port to BAT for Windows or BETTER python for crossplatform
+###
 
 ## Volatility banner only needed once per run :)
 echo $STARS using Volatility Foundation Volatility Framework 2.5 + Community plugins on `uname`
@@ -32,27 +37,27 @@ echo $STARS using Volatility Foundation Volatility Framework 2.5 + Community plu
 echo "$STARS 0) First, quick tables upfront to look for interesting processes"
 for p in pstree malsysproc connections sockets; do
 echo -n "$p "
-$VOL_COMM -f $VOL_FILEIN $p --output-file=$OUT_FOLDER/$VOL_FILEIN-vol25c-$p.txt $BANNER_CATCH ; done
-echo "$STARS Quick tables completed. Starting batch processing ..."
+$VOL_COMM -f $VOL_FILEIN $p --output-file=$OUT_FOLDER/$VOL_FILEIN-vol25c-$p.txt  ; done
+echo;echo "$STARS 0)Quick tables completed. 1)Starting batch plugin processing ..."
 
 ## do the whole batch of data processing, simple arguments
 for q in apihooks autoruns callbacks connections connscan cmdline cmdscan clipboard consoles dlllist driverirp drivermodule driverscan getsids iehistory handles hivelist hivescan imageinfo ldrmodules malfind malprocfind modscan modules psscan psxview schtasks shellbags sockscan ; do 
 
-echo -n " $q - "
-$VOL_COMM -f $VOL_FILEIN $q $BANNER_CATCH > $OUT_FOLDER/$VOL_FILEIN-vol25c-$q.txt; done
+echo -n " $q, "
+$VOL_COMM -f $VOL_FILEIN $q  > $OUT_FOLDER/$VOL_FILEIN-vol25c-$q.txt; done
 echo "$STARS 1) Batch processing, simple plugin arguments done"
 
 echo '$STARS 2) Starting complex plugins: pstotal DOT, eventlogs, svcscan V, mutantscan N, mftparser BODY, and timeliner'
-$VOL_COMM -f $VOL_FILEIN pstotal --output=dot $BANNER_CATCH > $OUT_FOLDER/$VOL_FILEIN-vol25c-pstotal.dot
-$VOL_COMM -f $VOL_FILEIN evtlogs -S -D $OUT_FOLDER/ $BANNER_CATCH > $OUT_FOLDER/$VOL_FILEIN-vol25c-evtlogs.txt
-$VOL_COMM -f $VOL_FILEIN svcscan -v $BANNER_CATCH > $OUT_FOLDER/$VOL_FILEIN-vol25c-svcscanv.txt
-$VOL_COMM -f $VOL_FILEIN mutantscan -s $BANNER_CATCH > $OUT_FOLDER/$VOL_FILEIN-vol25c-mutantsv.txt
-$VOL_COMM -f $VOL_FILEIN mftparser --output=body $BANNER_CATCH > $OUT_FOLDER/$VOL_FILEIN-vol25c-mftparser-body.txt 
-$VOL_COMM -f $VOL_FILEIN timeliner $BANNER_CATCH > $OUT_FOLDER/$VOL_FILEIN-vol25c-tl.txt
+$VOL_COMM -f $VOL_FILEIN pstotal --output=dot  > $OUT_FOLDER/$VOL_FILEIN-vol25c-pstotal.dot
+$VOL_COMM -f $VOL_FILEIN evtlogs -S -D $OUT_FOLDER/  > $OUT_FOLDER/$VOL_FILEIN-vol25c-evtlogs.txt
+$VOL_COMM -f $VOL_FILEIN svcscan -v  > $OUT_FOLDER/$VOL_FILEIN-vol25c-svcscanv.txt
+$VOL_COMM -f $VOL_FILEIN mutantscan -s  > $OUT_FOLDER/$VOL_FILEIN-vol25c-mutantsv.txt
+$VOL_COMM -f $VOL_FILEIN mftparser --output=body  > $OUT_FOLDER/$VOL_FILEIN-vol25c-mftparser-body.txt 
+$VOL_COMM -f $VOL_FILEIN timeliner  > $OUT_FOLDER/$VOL_FILEIN-vol25c-tl.txt
 
 echo "$STARS 3) Make pictures!"
 dot -T png $OUT_FOLDER/$VOL_FILEIN-vol25c-pstotal.dot > $OUT_FOLDER/$VOL_FILEIN-vol25c-pstotal.png
-$VOL_COMM -f $VOL_FILEIN screenshot -D $OUT_FOLDER $BANNER_CATCH
+$VOL_COMM -f $VOL_FILEIN screenshot -D $OUT_FOLDER 
 
 echo "$STARS Volatility batch run on $VOL_FILEIN completed!"
 
