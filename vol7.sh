@@ -49,7 +49,7 @@ echo -n " $q, "
 $VOLATILITY_COMM -f $VOLATILITY_FILEIN  $q  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-$q.txt; done
 echo; echo "$STARS 1) Batch processing, simple plugin arguments done"
 
-echo "$STARS 2) Starting complex plugins: autoruns V T all Table, ldrmodules V, pstotal DOT, svcscan V, malfind D, mutantscan N, mftparser BODY, and timeliner"
+echo "$STARS 2) Starting complex plugins: autoruns V T all Table, ldrmodules V, pstotal DOT, svcscan V, malfind D, mutantscan N, mftparser BODY, and timeliner BODY"
 $VOLATILITY_COMM -f $VOLATILITY_FILEIN  autoruns -v -t all --output=table  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-autoruns.txt
 $VOLATILITY_COMM -f $VOLATILITY_FILEIN  ldrmodules -v  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-ldrmodulesv.txt
 $VOLATILITY_COMM -f $VOLATILITY_FILEIN  pstotal --output=dot  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-pstotal.dot
@@ -57,7 +57,7 @@ $VOLATILITY_COMM -f $VOLATILITY_FILEIN  svcscan -v  > $OUT_FOLDER/$VOLATILITY_FI
 $VOLATILITY_COMM -f $VOLATILITY_FILEIN  malfind -D $OUT_FOLDER  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-malfindD.txt
 $VOLATILITY_COMM -f $VOLATILITY_FILEIN  mutantscan -s  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-mutantsv.txt
 $VOLATILITY_COMM -f $VOLATILITY_FILEIN  mftparser --output=body  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-mftparser-body.txt 
-$VOLATILITY_COMM -f $VOLATILITY_FILEIN  timeliner  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-tl.txt
+$VOLATILITY_COMM -f $VOLATILITY_FILEIN  timeliner --output=body  > $OUT_FOLDER/$VOL_FILEIN-vol25c-tl.body
 
 echo "$STARS 3) Make pictures!"
 dot -T png $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-pstotal.dot > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-pstotal.png
