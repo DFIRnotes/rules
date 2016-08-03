@@ -23,7 +23,7 @@ CLAMSCAN_COMM="clamscan -i -o"
 exec 2>/dev/null
 
 ## Formated output is nice
-STARS="***Gleeda's Vol ClamAV Triage***"
+STARS="***Volatility ClamAV Triage***"
 
 echo "$STARS Starting  plugins: dlldump memory D, malfind D, moddump"
 
@@ -34,6 +34,7 @@ $VOLATILITY_COMM moddump -memory -D $OUT_FOLDER  > $OUT_FOLDER/$VOLATILITY_FILEI
 echo "$STARS Plugins done; starting ClamAV scan: "
 
 $CLAMSCAN_COMM $OUT_FOLDER > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-clamscan.txt
-
-echo "$STARS completed"
+echo -n "$STARS ClamAV scan results:"
+grep 'Infected files:' $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-clamscan.txt
+echo; echo "$STARS completed"
 
