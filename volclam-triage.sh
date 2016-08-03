@@ -27,9 +27,9 @@ STARS="***Volatility ClamAV Triage***"
 
 echo "$STARS Starting  plugins: dlldump memory D, malfind D, moddump"
 
-$VOLATILITY_COMM dlldump -memory -D $OUT_FOLDER  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-dllddumpMD.txt
+$VOLATILITY_COMM dlldump --memory -D $OUT_FOLDER  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-dllddumpMD.txt
 $VOLATILITY_COMM malfind -D $OUT_FOLDER  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-malfindD.txt
-$VOLATILITY_COMM moddump -memory -D $OUT_FOLDER  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-moddumpMD.txt
+$VOLATILITY_COMM moddump --memory -D $OUT_FOLDER  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-moddumpMD.txt
 
 echo "$STARS Plugins done; starting ClamAV scan: "
 
