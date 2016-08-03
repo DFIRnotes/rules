@@ -45,7 +45,7 @@ $VOLATILITY_COMM $p --output-file=$OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-$p.txt  
 echo; echo "$STARS 0)Quick tables completed. 1)Starting batch plugin processing ..."
 
 ## do the whole batch of data processing, simple arguments
-for q in apihooks callbacks cmdline cmdscan clipboard consoles dlllist driverirp drivermodule driverscan getsids idt iehistory handles hivelist hivescan imageinfo modscan modules psxview schtasks shellbags ssdt; do 
+for q in apihooks callbacks cmdline cmdscan clipboard consoles dlllist driverirp drivermodule driverscan getsids idt iehistory handles hivelist hivescan imageinfo modscan modules prefetchparser psxview schtasks shellbags ssdt; do 
 
 echo -n " $q, "
 $VOLATILITY_COMM $q  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-$q.txt; done
