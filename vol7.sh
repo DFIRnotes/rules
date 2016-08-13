@@ -29,7 +29,7 @@ STARS="***Volatility batch***"
 ## FEATURE: if file exists and is greater than sizeof(vol usage error), skip the plugin ?
 ## FEATURE: tidy malsysproc extra linefeeds ?
 ## WISHLIST: find a way to use the ssdeep, baseline community plugins 
-## WISHLIST perf : Specify kdbg offset?
+## WISHLIST perf : Snarf from imageinfo and specify kdbg offset in vol_comm -g for speed?
 ## WISHLIST: duplicate image file to run plugins in parallel for faster results / test this more
 ## WISHLIST: port to BAT for Windows or BETTER python for crossplatform
 ###
