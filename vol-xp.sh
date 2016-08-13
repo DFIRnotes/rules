@@ -41,7 +41,7 @@ echo $STARS using Volatility Foundation Volatility Framework 2.5 + Community plu
 
 ## get some tables upfront to look for interesting processes
 echo "$STARS 0) First, quick tables upfront to look for interesting processes"
-for p in pstree malsysproc connections sockets imageinfo; do
+for p in pstree malsysproc malprocfind connections sockets imageinfo; do
 echo -n "$p "
 $VOLATILITY_COMM $p --output-file=$OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-$p.txt  ; done
 echo;echo "$STARS 0)Quick tables completed. 1)Starting batch plugin processing ..."
