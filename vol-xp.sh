@@ -24,6 +24,7 @@ STARS="***Volatility batch***"
 
 ### TODO  
 ## BUGFIX: Set out location to . if env var not set
+## BUGFIX: pstotal glitches
 ## FEATURE: document how to branch -2
 ## FEATURE: Pull volatility version rather than static string
 ## FEATURE: if file exists and is greater than sizeof(vol usage error), skip the plugin ?
