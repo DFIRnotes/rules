@@ -48,14 +48,16 @@ KDBG=$(grep KDBG *imageinfo* | awk -F':' '{print $2}' | sed -e 's/L//')
 VOL_COMM="$VOL_COMM -g $KDBG"
 
 ## do the whole batch of data processing, simple arguments
-for q in apihooks callbacks connections connscan cmdline cmdscan clipboard consoles dlllist driverirp drivermodule driverscan getsids idt iehistory handles hivelist hivescan ldrmodules modscan modules psxview schtasks shellbags sockscan ssdt; do 
+for q in apihooks callbacks connections connscan cmdline cmdscan clipboard consoles dlllist driverirp drivermodule driverscan getsids idt iehistory handles hivelist hivescan modscan modules psxview schtasks shellbags sockscan ssdt; do 
 
 echo -n " $q, "
 $VOLATILITY_COMM $q  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-$q.txt; done
 echo; echo "$STARS 1) Batch processing, simple plugin arguments done"
 
-echo "$STARS 2) Starting complex plugins: autoruns V T all Table, pstotal DOT, eventlogs, svcscan V, malfind D, mutantscan N, mftparser BODY, and timeliner BODY"
+echo "$STARS 2) Starting complex plugins: autoruns V T all Table, ldrmodules -V, pstree -V grep, pstotal DOT, eventlogs, svcscan V, malfind D, mutantscan N, mftparser BODY, and timeliner BODY"
 $VOLATILITY_COMM autoruns -v -t all --output=table  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-autoruns.txt
+$VOLATILITY_COMM ldrmodules -v  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-ldrmodulesv.txt
+$VOLATILITY_COMM pstree -v --output=greptext > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-pstreeV-grep.txt
 $VOLATILITY_COMM pstotal --output=dot  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-pstotal.dot
 $VOLATILITY_COMM evtlogs -S -D $OUT_FOLDER/  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-evtlogs.txt
 $VOLATILITY_COMM svcscan -v  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-svcscanv.txt
