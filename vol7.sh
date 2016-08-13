@@ -29,7 +29,6 @@ STARS="***Volatility batch***"
 ## FEATURE: if file exists and is greater than sizeof(vol usage error), skip the plugin ?
 ## FEATURE: tidy malsysproc extra linefeeds ?
 ## WISHLIST: find a way to use the ssdeep, baseline community plugins 
-## WISHLIST perf : Snarf from imageinfo and specify kdbg offset in vol_comm -g for speed?
 ## WISHLIST: duplicate image file to run plugins in parallel for faster results / test this more
 ## WISHLIST: port to BAT for Windows or BETTER python for crossplatform
 ###
@@ -39,13 +38,17 @@ echo $STARS using Volatility Foundation Volatility Framework 2.5 + Community plu
 
 ## get some tables upfront to look for interesting processes
 echo "$STARS 0) First, quick tables upfront to look for interesting processes"
-for p in pstree malsysproc netscan; do
+for p in pstree malsysproc netscan imageinfo; do
 echo -n "$p "
 $VOLATILITY_COMM $p --output-file=$OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-$p.txt  ; done
 echo; echo "$STARS 0)Quick tables completed. 1)Starting batch plugin processing ..."
 
+## use imageinfo to get KDBG, add to our vol cmd for speedup
+KDBG=$(grep KDBG *imageinfo* | awk -F':' '{print $2}' | sed -e 's/L//')
+VOL_COMM="$VOL_COMM -g $KDBG"
+
 ## do the whole batch of data processing, simple arguments
-for q in apihooks callbacks cmdline cmdscan clipboard consoles dlllist driverirp drivermodule driverscan getsids idt iehistory handles hivelist hivescan imageinfo ldrmodules modscan modules prefetchparser psxview schtasks shellbags ssdt; do 
+for q in apihooks callbacks cmdline cmdscan clipboard consoles dlllist driverirp drivermodule driverscan getsids idt iehistory handles hivelist hivescan ldrmodules modscan modules prefetchparser psxview schtasks shellbags ssdt; do 
 
 echo -n " $q, "
 $VOLATILITY_COMM $q  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-$q.txt; done
