@@ -1,0 +1,43 @@
+### Normalise VBA code in macros for easier code analysis, @adricnet
+
+## Remove all the DOS newlines to start
+/^[[:space:]]*$/d
+
+## Add in newlines we want to highlight code blocks
+s/end function/End Function\n/i
+s/end sub/End Sub\n/i
+
+## Fix mangled cASe obFUScaTioN while we are here
+s/end if/End If/i
+s/end for/End For/i
+s/Function /Function /i
+s/Sub /Sub /i
+s/set /Set /i
+s/if/If/i
+s/then/Then/i
+s/end /End /i
+s/for /For /i
+s/loop/Loop/i
+s/dim /Dim /i
+s/next/Next/i
+s/do while/Do While/i
+s/do until/Do Until/i
+s/next/Next/i
+s/timer/Timer/i
+s/second/Second/i
+s/\.open/.Open/i
+s/\.write/.Write/i
+s/\.close/.Close/i
+s/\.send/.Send/i
+s/resume next/Resume Next/i
+s/on error/On Error/i
+s/\.savetofile/.SaveToFile/i
+s/\.createtextfile/.CreateTextFile/i
+s/\.openastextstream/.OpenAsTextStream/i
+s/\.responsebody/.ResponseBody/i
+s/\.atendofstream/.AtEndOfStream/i
+s/\.environment/.Environment/i
+s/\.getfile/.GetFile/i
+s/\.run/.Run/i
+s/\=createobject/=CreateObject/i
+s/thisdocument\./ThisDocument./i
