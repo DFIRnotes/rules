@@ -48,7 +48,7 @@ KDBG=$(grep KDBG *imageinfo* | awk -F':' '{print $2}' | sed -e 's/L//')
 VOL_COMM="$VOL_COMM -g $KDBG"
 
 ## do the whole batch of data processing, simple arguments
-for q in apihooks callbacks cmdline cmdscan clipboard consoles dlllist driverirp drivermodule driverscan getsids idt iehistory handles hivelist hivescan modscan modules prefetchparser psxview schtasks shellbags ssdt; do 
+for q in apihooks callbacks cmdline cmdscan clipboard consoles dlllist driverirp drivermodule driverscan editbox getsids idt iehistory handles hivelist hivescan modscan modules prefetchparser psxview schtasks shellbags ssdt; do 
 
 echo -n " $q, "
 $VOLATILITY_COMM $q  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-$q.txt; done
