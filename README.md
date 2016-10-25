@@ -8,6 +8,8 @@ michael.ligh@mnin.org's marvelous example in Chapter 4 of the *Malware Analyst C
 * some simple yara rules that hit on imported libraries and function calls (CAP_something)
 * a batch processing Volatility script or two (eg for SIFT)
 * other sample yara rules, such as for PE module
+* a sed script for cleaning up VBA code syntax
+* OpenIOC examples, such as for Trickbot patterns reported by @hasherazade
 
 ## todos
 * [.] Win32 Inet CAP yara rule : string match works
