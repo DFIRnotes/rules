@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<ioc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="c47df997-9c20-4a15-89d6-88e49b7c5927" last-modified="2016-10-25T16:57:25" xmlns="http://schemas.mandiant.com/2010/ioc">
+  <short_description>*Trickbot mutex via @hasherezade (Malwarebytes)*</short_description>
+  <description>Trickbot mutant from research by @hasherezade (published by MalwareByte). Presence of this mutant handle in any process should be should be high fidelity.
+Ref: https://blog.malwarebytes.com/threat-analysis/2016/10/trick-bot-dyrezas-successor/</description>
+  <authored_by>@adricnet</authored_by>
+  <authored_date>2016-10-25T16:52:52</authored_date>
+  <links>
+    <link rel="report">https://blog.malwarebytes.com/threat-analysis/2016/10/trick-bot-dyrezas-successor/</link>
+  </links>
+  <definition>
+    <Indicator operator="OR" id="1f726f91-123c-4769-9dd3-13bb5eee6be9">
+      <IndicatorItem id="96e2fc9e-4612-4b61-8a2d-396a3248b871" condition="contains">
+        <Context document="ProcessItem" search="ProcessItem/HandleList/Handle/Type" type="mir" />
+        <Content type="string">Mutant</Content>
+      </IndicatorItem>
+      <Indicator operator="AND" id="a995de54-1f7d-45d5-9672-c4ebe3d762f3">
+        <IndicatorItem id="b9551f80-e974-4388-b6ca-a6811f54a489" condition="contains">
+          <Context document="ProcessItem" search="ProcessItem/HandleList/Handle/Name" type="mir" />
+          <Content type="string">Global\\TrickBot</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </definition>
+</ioc>
