@@ -58,7 +58,7 @@ echo "$STARS 2) Starting complex plugins: autoruns V T all Table, pstree -V grep
 $VOLATILITY_COMM autoruns -v -t all --output=table  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-autoruns.txt
 $VOLATILITY_COMM pstree -v --output=greptext > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-pstreeV-grep.txt
 $VOLATILITY_COMM ldrmodules -v  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-ldrmodulesv.txt
-$VOLATILITY_COMM pstotal --output=dot  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-pstotal.dot
+$VOLATILITY_COMM pstree --output=dot  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-pstree.dot
 $VOLATILITY_COMM svcscan -v  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-svcscanv.txt
 $VOLATILITY_COMM malfind -D $OUT_FOLDER  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-malfindD.txt
 $VOLATILITY_COMM mutantscan -s  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-mutantsv.txt
@@ -66,7 +66,7 @@ $VOLATILITY_COMM mftparser --output=body  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25
 $VOLATILITY_COMM timeliner --output=body  > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-tl.body
 
 echo "$STARS 3) Make pictures!"
-dot -T png $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-pstotal.dot > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-pstotal.png
+dot -T png $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-pstree.dot > $OUT_FOLDER/$VOLATILITY_FILEIN-vol25c-pstree.png
 $VOLATILITY_COMM screenshot -D $OUT_FOLDER 
 
 echo "$STARS Volatility batch run on $VOLATILITY_FILEIN completed!"
