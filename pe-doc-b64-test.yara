@@ -13,7 +13,9 @@ import "magic"
 
 /*
 ## Sample string generation kludge
-pq=$(for n in 2 4 6 8; do for exe in /media/removable/SD\ Card/inst/*.exe ~/.wine/drive_c/Program\ Files/Internet\ Explorer/iexplore.exe; do dd if="$exe" count=1 bs="$n" 2>/dev/null | base64; done ;done | cut -b3-4 | uniq | grep -v '=')
+pq=$(for n in 2 4 6 8; do for exe in /media/removable/SD\ Card/inst/*.exe \
+  ~/.wine/drive_c/Program\ Files/Internet\ Explorer/iexplore.exe; do dd if="$exe" count=1 bs="$n" 2>/dev/null \
+  | base64; done ;done | cut -b3-4 | uniq | grep -v '=')
 ## qQ pQ pA qQ pQ pA qQ pQ pA
 for p in `echo $pq` ; do echo -n '|'$p ; done ; echo
 ## |qQ|pQ|pA|qQ|pQ|pA|qQ|pQ|pA
