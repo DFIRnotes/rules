@@ -1,5 +1,6 @@
-!#/bin/bash
+#!/bin/bash
 ## Grab the original HoneyNet challenge files from hn.org, extract and mount them.
+## Needs sudo for mounting
 ## TODO: It would be good to check if the files exists before making with the downloading (again)
 
 mkdir /cases/hnfc; cd /cases/hnfc
