@@ -33,5 +33,5 @@ rule possible_py2exe_created_file
   meta:
     author = "@adricnet"
   condition:
-    $pyscript_label and $py2exe_activation_error
+    has_pythonscript_label and has_py2exe_err_string
 }
