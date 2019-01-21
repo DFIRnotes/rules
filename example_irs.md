@@ -26,7 +26,7 @@ _part of environmental and analytical coverage_
 
 _email threat and block collection -> \$email\_threat\_data_
 
-### (do good stuff)
+### (do good stuff to get email threat data)
 * (email block events)
 * (email attachment file data)
 * (capabilities scans (yara?) and sampling manual analysis fill-ins)
@@ -34,16 +34,41 @@ _email threat and block collection -> \$email\_threat\_data_
 _capabilities survey_
 
 ### What techniques are the \$email\_threat\_data exhibiting?
+_Sifting file attachments from URLs, droppers from downloaders and stagers ..._
 
 * What delivery techniques ?
 * What document or file formats ?
 * What obfuscation techniques ?
-* What anti-analysis techniques?
+* What anti-analysis techniques ?
+* What device fingerprinting techniques ?
 * What network/C2 techniques ?
   * What COMSEC seen?
   * Does the sample exhibit the ability to use TLS ?
     * (Certificate questions)
     * (middlebox effectiveness vs their TLS/comsec )
+
+* Which of these techniques do we not detect/prevent with currently deployed controls ?
+
+## Web malware capabilities (chain)
+
+_Build a chain like email but for drivebys and exploit kits_
+
+### (do good stuff to get \$web_threat_data)
+
+### What techniques are the \$web\_threat\_data exhibiting?
+_URLs and web code delivery_
+
+* What delivery techniques ?
+* What document or file formats ?
+* What obfuscation techniques ?
+* What anti-analysis techniques ?
+* What device fingerprinting techniques ?
+* ... active media content platforms like Java applets, Flash, ActiveX, Silverlight?
+* ... code (JS) minification, obfuscation, encryption ?
+
+_File based questions cross over with files IR chain (started with email delivery)_
+
+_COMSEC and TLS questions cross over with files IR chain_
 
 * Which of these techniques do we not detect/prevent with currently deployed controls ?
 
