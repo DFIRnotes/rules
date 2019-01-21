@@ -102,13 +102,13 @@ _and then automate the sweeps (given sources) and ask about the cadence_
 
 ### Host
 
-* With an executable hash, can we measure what percentage of endpoints executed that files in the past 7 days ?
+* With an executable file by hash (and size), can we measure what percentage of endpoints executed that file in the past 7 days ?
   * How long does it take to get these sweep results ?
 * With a mutex, can we measure what percentage of endpoints manifested that in the past 7 days ?
   * How long does it take to get these sweep results ?
-* With a Yara (mem) pattern,  can we measure what percentage of endpoints in-memory processes match ?
+* With a Yara (memory) pattern rule,  can we measure what percentage of endpoints in-memory processes match ?
   * How long does it take to get these sweep results ?
-* With a Yara (file) pattern,  can we measure what percentage of endpoints have that file in their local filesystem ?
+* With a Yara (file) pattern rule,  can we measure what percentage of endpoints have that file in their local filesystem ?
   * How long does it take to get these sweep results ?
 * With a data file hash (and size), can we measure what percentage of endpoints have that file in their local filesystem ?
   * How long does it take to get these sweep results ?
@@ -124,11 +124,11 @@ _and then automate the sweeps (given sources) and ask about the cadence_
 _clouds, fileshares, external media, backups..._
 
 foreach \$fileshare
-* With an executable hash, can we measure what percentage of fileshare have that file in their storage ?
+* With an executable file by hash (and size), can we measure what percentage of fileshare have that file in their storage ?
   * How long does it take to get these sweep results ?
 * With a data file hash (and size), can we measure what percentage of fileshare have that file in their storage ?
   * How long does it take to get these sweep results ?
-* With a Yara (file) pattern,  can we measure what percentage of fileshare have that file in their storage ?
+* With a Yara (file) pattern rule,  can we measure what percentage of fileshare have that file in their storage ?
   * How long does it take to get these sweep results ?
 
 ## Threat Model
