@@ -74,6 +74,8 @@ _COMSEC and TLS questions cross over with files IR chain_
 
 ## Indicator collections and feeds
 
+_lots of overlap here with the collections management framework (CMF) once you have one_
+
 _should provide: "given sources of various indicator types"_
 
 _further talk about your confidence or fidelity ratings for sources and types inside and outside?_
