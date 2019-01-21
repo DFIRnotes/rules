@@ -72,11 +72,32 @@ _COMSEC and TLS questions cross over with files IR chain_
 
 * Which of these techniques do we not detect/prevent with currently deployed controls ?
 
+## Indicator collections and feeds
+
+_should provide: "given sources of various indicator types"_
+
+_further talk about yuor confidence or fidelity ratings for sources and types inside and outside?_
+
+Internally generated (produced locally )
+* What internal sources of atomic host indicators are available in the environment ?
+* What internal sources of behavioural indicators are available in the environment ?
+* What internal sources of atomic network indicators are available in the environment ?
+* What internal sources of behavioural network indicators are available in the environment ?
+
+Externally generated (consumed from outside sources)
+* What external sources of atomic host indicators are available (in use) ?
+* What external sources of behavioural indicators are available (in use) ?
+* What external sources of atomic network indicators are available (in use) ?
+* What external sources of behavioural network indicators are available (in use) ?
+
+
 ## Indicator Sweeps
 
-_given sources of various indicator types, can we broadly and confidentailly check for them in the environment?_
+_given sources of various indicator types, can we broadly and confidentially check for them in the environment?_
 
 _Seven days (7d) log searches and live scans for contrast, log availability and time scope questions found elsewhere, like in in the collections management framework (CMF) and its data access IRs_
+
+_and then automate the sweeps (given sources) and ask about the cadence_
 
 ### Host
 
