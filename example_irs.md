@@ -76,7 +76,7 @@ _COMSEC and TLS questions cross over with files IR chain_
 
 _should provide: "given sources of various indicator types"_
 
-_further talk about yuor confidence or fidelity ratings for sources and types inside and outside?_
+_further talk about your confidence or fidelity ratings for sources and types inside and outside?_
 
 Internally generated (produced locally )
 * What internal sources of atomic host indicators are available in the environment ?
@@ -89,7 +89,6 @@ Externally generated (consumed from outside sources)
 * What external sources of behavioural indicators are available (in use) ?
 * What external sources of atomic network indicators are available (in use) ?
 * What external sources of behavioural network indicators are available (in use) ?
-
 
 ## Indicator Sweeps
 
