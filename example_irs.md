@@ -111,7 +111,7 @@ foreach \$fileshare
 
 ## Threat Model
 
-_Some chains leading towards threat models or strategic risks_
+_Some chains leading towards threat models or at least thinking about strategic risks_
 
 What do we have that they want (CNE)?
 *  Who are they?
@@ -128,4 +128,4 @@ How could our operations be significantly disrupted by an attack (CNA) ?
 
 ### Software supply chain
 
-_In which SSDLC, module and dependency management, license management, build standards and configuration meet back up with threat modeling_
+_In which SSDLC, module and dependency management, license management, build standards and configuration meet back up with threat modeling via vulnerability management..._
