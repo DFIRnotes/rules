@@ -1,16 +1,22 @@
+#!/bin/bash
+###  Mods to lmg for Kali use
+### Install deps, checkout things, set up folders for success, baseed on https://github.com/halpomeranz/lmg
+### uses volatility, avml, lmg
 
 ## apt installs
 sudo apt install volatility dwarfdump sleuthkit ipython lime-forensics-dkms ewf-tools gdb
 
 ## git clone volatility and profiles, lmg
 git clone https://github.com/halpomeranz/lmg
+git clone https://github.com/volatilityfoundation/volatility
+# git clone https://github.com/volatilityfoundation/profiles
 
 cd lmg
 
 wget https://github.com/microsoft/avml/releases/download/v0.2.0/avml
 
-#rename avml , link our volatility dwarfdump into lmg with LMG expected names
-ln -s /home/kali/volatility .
+#rename avml , link our system dwarfdump into lmg with LMG expected names
+# ln -s /home/kali/volatility .
 ln -s /usr/bin/dwarfdump dwarfdump-x86_64
 mv avml avml-x86_64
 
